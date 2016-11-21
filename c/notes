@@ -1,0 +1,6 @@
+2016-11-21
+不要轻易使用using namespace std. 尤其是在使用boost的情况下.
+动态链接库要ln -s 到/usr/lib/下，在codeblocks链接选项里加上 -lXXXXX
+链接这部分需要再看!
+
+boost log模块可以配置一个全局有效的loger，方便随时调取

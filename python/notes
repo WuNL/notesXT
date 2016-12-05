@@ -9,3 +9,4 @@ python修改Win系统的网络参数：
 	netinfoDict["IPSubnet"] = interface.IPSubnet[0]
 	netinfoDict["DefaultIPGateway"] = interface.DefaultIPGateway[0]
 5. 完成
+存在的问题：不能修改网关为空值，网络上有说先设置DHCP再关闭能清空网关，实际测试未实现。

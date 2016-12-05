@@ -4,3 +4,6 @@
 boost log模块可以配置一个全局有效的loger，方便随时调取
 在codeblocks下配置boost库：search directories正常配置，但是在链接库那里需要加上boost_system之类的东西，类似于gcc命令行加-lboost_system.
 在编译器那里加上-DBOOST_LOG_DYN_LINK 或者在文件第一行加上#define BOOST_LOG_DYN_LINK 1
+
+2016-12-5
+WinPcap抓包库

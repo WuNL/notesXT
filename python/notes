@@ -10,3 +10,7 @@ python修改Win系统的网络参数：
 	netinfoDict["DefaultIPGateway"] = interface.DefaultIPGateway[0]
 5. 完成
 存在的问题：不能修改网关为空值，网络上有说先设置DHCP再关闭能清空网关，实际测试未实现。
+
+2016-12-6 django request POST方法无效问题：
+描述：ajax POST方法提交数据到django后台，但是Django将此请求归类为GET方法，但是浏览器提示此请求为POST方法
+故障原因&解决方法：在请求中添加一个参数，估计是因为django认为此请求不带参数就不是POST方法导致

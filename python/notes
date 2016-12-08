@@ -14,3 +14,16 @@ python修改Win系统的网络参数：
 2016-12-6 django request POST方法无效问题：
 描述：ajax POST方法提交数据到django后台，但是Django将此请求归类为GET方法，但是浏览器提示此请求为POST方法
 故障原因&解决方法：在请求中添加一个参数，估计是因为django认为此请求不带参数就不是POST方法导致
+
+2016-12-8 Django Daemon Process问题
+解决方法有多种
+1：django-background-tasks 可以设置后台任务，定时触发执行，问题是在SQLite下存在持续database locked 问题，在其他高性能数据库下不存在此BUG
+2：Celery，python后台任务开源库，问题是比较复杂学习成本高，优点是性能好，在多个著名互联网使用
+3：土方法，单起脚本，注入django环境和使用项目数据库，优点是简单容易控制，尽量不要长时间使用数据库应该也存在database locked问题
+3的代码为：
+import os
+os.chdir('path/to/project/')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project_name.settings")
+from app.models import *
+剩下的自己随意发挥即可
+PS：注意使用3脚本时不要在__init__中引入数据模型，否则会报错。初步估计是os.environ也会调用__init__初始化导致数据模型位置的问题

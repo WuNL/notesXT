@@ -40,3 +40,34 @@ process_id, return_value = c.Win32_Process.Create (CommandLine="notepad.exe")
 for process in c.Win32_Process (ProcessId=process_id):
   print process.ProcessId, process.Name
 result = process.Terminate ()
+
+2016-12-20 protobuf相关问题
+升级为2.6版本，主要目的是使用oneof特性，最终目的是为了解决通过网络收到消息后不知道该消息是什么类型的问题，通过使用oneof特性，能够将N个消息集成到一个消息中，但是该消息会清除其他消息，意味着该消息只会使用one of 其中一个子消息。收到消息后能够通过HasField WhichOneof 等函数确定消息类型
+升级方法：编译protoc.exe或者下release win32，进入XX\protobuf-2.6.1\protobuf-2.6.1\python 中python setup.py build / install 注：联网！离线安装很麻烦
+code： https://developers.google.com/protocol-buffers/docs/reference/python-generated#oneof
+message Foo {
+  oneof test_oneof {
+     string name = 1;
+     int32 serial_number = 2;
+  }
+}
+
+message = Foo()
+message.name = "Bender"
+assert message.HasField("name")
+message.serial_number = 2716057
+assert message.HasField("serial_number")
+assert not message.HasField("name")
+
+assert message.WhichOneof("test_oneof") is None
+message.name = "Bender"
+assert message.WhichOneof("test_oneof") == "name"
+
+assert not message.HasField("test_oneof")
+message.name = "Bender"
+assert message.HasField("test_oneof")
+message.serial_number = 2716057
+assert message.HasField("test_oneof")
+message.ClearField("test_oneof")
+assert not message.HasField("test_oneof")
+assert not message.HasField("serial_number")

@@ -7,3 +7,6 @@ boost log模块可以配置一个全局有效的loger，方便随时调取
 
 2016-12-5
 WinPcap抓包库
+
+2017-3-18
+dzy推流工具使用：  ./readFileSendRTP 8080 127.0.0.1

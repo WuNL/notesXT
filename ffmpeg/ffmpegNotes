@@ -1,2 +1,3 @@
 16-12-5 ffmpeg分配的内存有限制，分出多个线程仍存在内存问题。解决方法是使用进程，状态明显好转 
 16-12-6 ffmpeg 能为解码器设置多线程模式，具体是在初始化那里，但是没什么卵用还是卡
+17-3-20 Linux下使用ffmpeg会出现cannot load libcuda.so.1的错误，因为安装过Nv的驱动，以为是其他问题查了很久。实际上可能是因为cuda没有完整的安装，也可能是显卡是阉割版。解决方法：安装x264 再重新安装ffmpeg 网址：http://blog.csdn.net/li_wen01/article/details/62889494
